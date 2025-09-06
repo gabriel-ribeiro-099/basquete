@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+
     tools:context="com.example.basquete.MainActivity">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFC107"  android:padding="3dp">
+        <TextView
+        android:id="@+id/tempoJogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"  android:fontFamily="@font/digital_font"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp"
+        android:text="00:00"
+        android:textColor="#FFC107"   android:textSize="54sp" />
+
+    </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -22,8 +49,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="16dp"
-                android:text="Time A"
+                android:text="TIME A"
                 android:textSize="14sp"
+                android:textColor="@color/white"
                 android:fontFamily="sans-serif"/>
 
             <TextView
@@ -34,12 +62,89 @@
                 android:padding="4dp"
                 android:text="0"
                 android:textSize="54sp"
+                android:textColor= "#FF0000"
+                android:fontFamily="@font/digital_font" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/periodoTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="PERIODO"
+                android:textSize="14sp"
+                android:textColor="@color/white"
                 android:fontFamily="sans-serif"/>
+
+            <TextView
+                android:id="@+id/periodo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="0"
+                android:textSize="54sp"
+                android:textColor="#FFC107"
+                android:fontFamily="@font/digital_font" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/timeB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="TIME B"
+                android:textSize="14sp"
+                android:textColor= "@color/white"
+                android:fontFamily="sans-serif"/>
+
+            <TextView
+                android:id="@+id/placarTimeB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="0"
+                android:textSize="54sp"
+                android:textColor= "#FF0000"
+                android:fontFamily="@font/digital_font" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/tresPontosA"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="+3 PONTOS" />
 
@@ -56,6 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="Tiro Livre" />
+
         </LinearLayout>
 
         <View
@@ -69,26 +175,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/timeB"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="Time B"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"/>
-
-            <TextView
-                android:id="@+id/placarTimeB"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="0"
-                android:textSize="54sp"
-                android:fontFamily="sans-serif"/>
 
             <Button
                 android:id="@+id/tresPontosB"
@@ -110,16 +196,37 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="Tiro Livre" />
+
         </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+    <Button
+        android:id="@+id/iniciarJogo"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:backgroundTint="#67CB57"
+        android:text="Iniciar Jogo" />
+    <Button
+        android:id="@+id/verEstatistica"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:text="Ver Estatistica" />
 
     <Button
         android:id="@+id/reiniciarPartida"
-        android:layout_width="match_parent"
+        android:layout_width="356dp"
         android:layout_height="wrap_content"
-        android:text="Reiniciar Partida"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="32dp"/>
-</RelativeLayout>
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:text="Reiniciar Partida" />
+    </LinearLayout>
+</LinearLayout>
