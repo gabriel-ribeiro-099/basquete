@@ -1,10 +1,16 @@
-# Default ignored files
+/build/
+.gradle/
+*.log
+
+.idea/
+*.iml
+*.ipr
+*.iws
 /shelf/
 /workspace.xml
-.gitignore
-build.gradle.kts
-gradle
-gradle.properties
-gradlew
-gradlew.bat
-settings.gradle.kts
+.vscode/
+
+.DS_Store
+Thumbs.db
+
+local.properties
