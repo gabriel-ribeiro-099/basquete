@@ -1,5 +1,6 @@
 package com.example.basquete
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Button
@@ -11,14 +12,18 @@ class MainActivity : ComponentActivity() {
     private var pontuacaoTimeA: Int = 0
     private var periodo: Int = 0
     private var pontuacaoTimeB: Int = 0
-
+    private var metricas: IntArray = IntArray(8)
     private lateinit var pTimeATextView: TextView
     private lateinit var pTimeBTextView: TextView
     private lateinit var periodoTextView: TextView
     private lateinit var tempoJogoTextView: TextView
     private lateinit var iniciarJogoButton: Button
+    private lateinit var reiniciarJogoButton: Button
+    private lateinit var metricasJogoButton: Button
+    private lateinit var pausarTempoButton: Button
 
     private var countDownTimer: CountDownTimer? = null
+    private var isTimerRodando = false
     private var isGameStarted = false
     private val tempoDoPeriodoEmMilissegundos: Long = 10 * 1000 //dps coloca 10 minutos
 
@@ -39,15 +44,33 @@ class MainActivity : ComponentActivity() {
 
         tempoJogoTextView = findViewById(R.id.tempoJogo)
         iniciarJogoButton = findViewById(R.id.iniciarJogo)
+        reiniciarJogoButton = findViewById(R.id.reiniciarPartida)
+        pausarTempoButton = findViewById(R.id.btnPause)
+        metricasJogoButton = findViewById(R.id.verMetricas)
 
         iniciarJogoButton.setOnClickListener {
             if (!isGameStarted) {
                 reiniciarPartida()
                 isGameStarted = true
             }
+            if(periodo != 0){
+                metricas[(periodo - 1) * 2] = pontuacaoTimeA
+                metricas[((periodo - 1) * 2)+1] = pontuacaoTimeB
+            }
             periodo += 1
             periodoTextView.setText(periodo.toString())
             iniciarTimer()
+        }
+        reiniciarJogoButton.setOnClickListener {
+            isGameStarted = false
+            iniciarJogoButton.text = "Iniciar Novo Jogo"
+            reiniciarPartida()
+        }
+        pausarTempoButton.setOnClickListener {
+            //add logica
+        }
+        metricasJogoButton.setOnClickListener {
+            exibirDialogoDeMetricas()
         }
         bTresPontosTimeA.setOnClickListener {
             adicionarPontos(3, "A")
@@ -121,4 +144,19 @@ class MainActivity : ComponentActivity() {
         periodoTextView.setText(periodo.toString())
         Toast.makeText(this,"Placar reiniciado",Toast.LENGTH_SHORT).show()
     }
+
+    private fun exibirDialogoDeMetricas() {
+        val mensagemDoDialog = "Placar Período 1: ${metricas[0]} x ${metricas[1]}\nPlacar Período 2: ${metricas[2]} x ${metricas[3]}\nPlacar Período 3: ${metricas[4]} x ${metricas[5]}\nPlacar Período 4: ${metricas[6]} x ${metricas[7]}}"
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Métricas do jogo")
+        builder.setMessage(mensagemDoDialog)
+        builder.setIcon(android.R.drawable.ic_dialog_info)
+        builder.setNegativeButton("Fechar", null)
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(true)
+        alertDialog.show()
+    }
+
 }
