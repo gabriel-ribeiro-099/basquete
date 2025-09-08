@@ -80,6 +80,7 @@ class MainActivity : ComponentActivity() {
             if (isTimerRodando) {
                 countDownTimer?.cancel()
                 isTimerRodando = false
+                pausarTempoButton.text = getString(R.string.symbol_play)
             } else {
                 if (isGameStarted && tempoRestanteEmMilissegundos > 0) {
                     iniciarTimer(tempoRestanteEmMilissegundos )
@@ -113,6 +114,7 @@ class MainActivity : ComponentActivity() {
         countDownTimer?.cancel()
         isTimerRodando = true
         iniciarJogoButton.isEnabled = false
+        pausarTempoButton.text = getString(R.string.symbol_pause)
         countDownTimer = object : CountDownTimer(duracao,1000) {
 
             override fun onTick(millisUntilFinished: Long) {
@@ -128,6 +130,7 @@ class MainActivity : ComponentActivity() {
                 tempoJogoTextView.text = "00:00"
                 isTimerRodando = false
                 iniciarJogoButton.isEnabled = true
+                pausarTempoButton.text = getString(R.string.symbol_play)
                 if(periodo >= 4){
                     metricas[(periodo - 1) * 2] = pontuacaoTimeA
                     metricas[((periodo - 1) * 2) + 1] = pontuacaoTimeB
@@ -177,6 +180,7 @@ class MainActivity : ComponentActivity() {
         isTimerRodando = false
         iniciarJogoButton.isEnabled = true
         iniciarJogoButton.text = "Iniciar Jogo"
+        pausarTempoButton.text = getString(R.string.symbol_play)
         Toast.makeText(this,"Placar reiniciado",Toast.LENGTH_SHORT).show()
     }
 
