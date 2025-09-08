@@ -25,7 +25,9 @@ class MainActivity : ComponentActivity() {
     private var countDownTimer: CountDownTimer? = null
     private var isTimerRodando = false
     private var isGameStarted = false
-    private val tempoDoPeriodoEmMilissegundos: Long = 10 * 1000 //dps coloca 10 minutos
+    private val tempoDoPeriodoEmMilissegundos: Long = 10 * 1000
+    private var tempoRestanteEmMilissegundos: Long = tempoDoPeriodoEmMilissegundos
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,22 +54,37 @@ class MainActivity : ComponentActivity() {
             if (!isGameStarted) {
                 reiniciarPartida()
                 isGameStarted = true
+                iniciarJogoButton.text = "Iniciar Novo Período"
             }
-            if(periodo != 0){
+            if(periodo in 1..3){
                 metricas[(periodo - 1) * 2] = pontuacaoTimeA
                 metricas[((periodo - 1) * 2)+1] = pontuacaoTimeB
             }
-            periodo += 1
-            periodoTextView.setText(periodo.toString())
-            iniciarTimer()
+            if (periodo < 4) {
+                periodo += 1
+                periodoTextView.setText(periodo.toString())
+                tempoRestanteEmMilissegundos = tempoDoPeriodoEmMilissegundos
+                iniciarTimer(tempoRestanteEmMilissegundos)
+            } else {
+                Toast.makeText(this, "Fim de jogo!", Toast.LENGTH_LONG).show()
+                iniciarJogoButton.isEnabled = false
+            }
         }
         reiniciarJogoButton.setOnClickListener {
             isGameStarted = false
             iniciarJogoButton.text = "Iniciar Novo Jogo"
+            periodo = 1;
             reiniciarPartida()
         }
         pausarTempoButton.setOnClickListener {
-            //add logica
+            if (isTimerRodando) {
+                countDownTimer?.cancel()
+                isTimerRodando = false
+            } else {
+                if (isGameStarted && tempoRestanteEmMilissegundos > 0) {
+                    iniciarTimer(tempoRestanteEmMilissegundos )
+                }
+            }
         }
         metricasJogoButton.setOnClickListener {
             exibirDialogoDeMetricas()
@@ -92,12 +109,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun iniciarTimer() {
+    private fun iniciarTimer(duracao: Long) {
         countDownTimer?.cancel()
-
-        countDownTimer = object : CountDownTimer(tempoDoPeriodoEmMilissegundos, 1000) {
+        isTimerRodando = true
+        iniciarJogoButton.isEnabled = false
+        countDownTimer = object : CountDownTimer(duracao,1000) {
 
             override fun onTick(millisUntilFinished: Long) {
+                tempoRestanteEmMilissegundos = millisUntilFinished
                 val segundosRestantes = millisUntilFinished / 1000
                 val minutos = segundosRestantes / 60
                 val segundos = segundosRestantes % 60
@@ -107,15 +126,20 @@ class MainActivity : ComponentActivity() {
 
             override fun onFinish() {
                 tempoJogoTextView.text = "00:00"
-                if(periodo == 4){
+                isTimerRodando = false
+                iniciarJogoButton.isEnabled = true
+                if(periodo >= 4){
+                    metricas[(periodo - 1) * 2] = pontuacaoTimeA
+                    metricas[((periodo - 1) * 2) + 1] = pontuacaoTimeB
                     isGameStarted = false;
                     iniciarJogoButton.text = "Iniciar Novo Jogo"
+                    Toast.makeText(this@MainActivity, "Fim de jogo!", Toast.LENGTH_LONG).show()
                 }
                 if (isGameStarted) {
                     iniciarJogoButton.text = "Iniciar Novo Período"
                 }
             }
-        }.start() // Inicia o timer
+        }.start()
     }
 
     fun adicionarPontos(pontos: Int, time: String) {
@@ -142,11 +166,22 @@ class MainActivity : ComponentActivity() {
         pTimeBTextView.setText(pontuacaoTimeB.toString())
         periodo = 0
         periodoTextView.setText(periodo.toString())
+        metricas = IntArray(8)
+        countDownTimer?.cancel()
+        val minutos = tempoDoPeriodoEmMilissegundos / 1000 / 60
+        val segundos = tempoDoPeriodoEmMilissegundos / 1000 % 60
+        tempoJogoTextView.text = String.format("%02d:%02d", minutos, segundos)
+        tempoRestanteEmMilissegundos = tempoDoPeriodoEmMilissegundos
+
+        isGameStarted = false
+        isTimerRodando = false
+        iniciarJogoButton.isEnabled = true
+        iniciarJogoButton.text = "Iniciar Jogo"
         Toast.makeText(this,"Placar reiniciado",Toast.LENGTH_SHORT).show()
     }
 
     private fun exibirDialogoDeMetricas() {
-        val mensagemDoDialog = "Placar Período 1: ${metricas[0]} x ${metricas[1]}\nPlacar Período 2: ${metricas[2]} x ${metricas[3]}\nPlacar Período 3: ${metricas[4]} x ${metricas[5]}\nPlacar Período 4: ${metricas[6]} x ${metricas[7]}}"
+        val mensagemDoDialog = "Placar Período 1: ${metricas[0]} x ${metricas[1]}\nPlacar Período 2: ${metricas[2]} x ${metricas[3]}\nPlacar Período 3: ${metricas[4]} x ${metricas[5]}\nPlacar Período 4: ${metricas[6]} x ${metricas[7]}"
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Métricas do jogo")

@@ -39,12 +39,12 @@
         android:id="@+id/btnPause"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:text="❚❚"
         android:textSize="24sp"
         android:textColor="@android:color/white"
         android:backgroundTint="@android:color/black"
         android:layout_margin="8dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="@string/symbol_play"/>
 
 
     <LinearLayout
