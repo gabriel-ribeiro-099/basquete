@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.example.basquete.MainActivity"
+    tools:ignore="MissingClass">
+
+    <TextView
+        android:id="@+id/timeA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="TIME A"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/placarTimeA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digital_7"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#FF0000"
+        android:textSize="54sp"
+        app:layout_constraintEnd_toEndOf="@id/timeA"
+        app:layout_constraintStart_toStartOf="@id/timeA"
+        app:layout_constraintTop_toBottomOf="@id/timeA" />
+
+    <LinearLayout
+        android:id="@+id/botoesTimeA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/timeA"
+        app:layout_constraintStart_toStartOf="@id/timeA"
+        app:layout_constraintTop_toBottomOf="@id/placarTimeA">
+
+        <Button
+            android:id="@+id/tresPontosA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:backgroundTint="#FF3B30"
+            android:text="+3 PONTOS"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/doisPontosA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#FF9500"
+            android:text="+2 PONTOS"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/tiroLivreA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#FFCC00"
+            android:text="Tiro Livre"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frameTempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#FFC107"
+        android:padding="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tempoJogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:fontFamily="@font/digital_7"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="00:00"
+            android:textColor="#FFC107"
+            android:textSize="54sp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/periodoTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PERIODO"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/frameTempo"
+        app:layout_constraintStart_toStartOf="@id/frameTempo"
+        app:layout_constraintTop_toBottomOf="@id/frameTempo" />
+
+    <TextView
+        android:id="@+id/periodo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digital_7"
+        android:text="0"
+        android:textColor="#FFC107"
+        android:textSize="54sp"
+        app:layout_constraintEnd_toEndOf="@id/periodoTag"
+        app:layout_constraintStart_toStartOf="@id/periodoTag"
+        app:layout_constraintTop_toBottomOf="@id/periodoTag" />
+
+    <Button
+        android:id="@+id/btnPause"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="8dp"
+        android:text="@string/symbol_play"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@id/periodo"
+        app:layout_constraintStart_toStartOf="@id/periodo"
+        app:layout_constraintTop_toBottomOf="@id/periodo" />
+
+
+    <LinearLayout
+        android:id="@+id/botoesControle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/iniciarJogo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:backgroundTint="#34C759"
+            android:text="Iniciar"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/verMetricas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:backgroundTint="#8E8E93"
+            android:text="Métricas"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/reiniciarPartida"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="#8E8E93"
+            android:text="Reiniciar"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/timeB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="TIME B"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/placarTimeB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digital_7"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#FF0000"
+        android:textSize="54sp"
+        app:layout_constraintEnd_toEndOf="@id/timeB"
+        app:layout_constraintStart_toStartOf="@id/timeB"
+        app:layout_constraintTop_toBottomOf="@id/timeB" />
+
+    <LinearLayout
+        android:id="@+id/botoesTimeB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/timeB"
+        app:layout_constraintStart_toStartOf="@id/timeB"
+        app:layout_constraintTop_toBottomOf="@id/placarTimeB">
+
+        <Button
+            android:id="@+id/tresPontosB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:backgroundTint="#FF3B30"
+            android:text="+3 PONTOS"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/doisPontosB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#FF9500"
+            android:text="+2 PONTOS"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/tiroLivreB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#FFCC00"
+            android:text="Tiro Livre"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
