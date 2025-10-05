@@ -6,9 +6,10 @@ import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.example.basquete.R
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     private var pontuacaoTimeA: Int = 0
     private var periodo: Int = 0
     private var pontuacaoTimeB: Int = 0
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_basquete_main)
 
         pTimeATextView = findViewById(R.id.placarTimeA)
         pTimeBTextView = findViewById(R.id.placarTimeB)
